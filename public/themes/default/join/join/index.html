@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>加入硕闻-{$site_info.site_name} </title>
+<!-- 页面关键词 keywords -->
+<meta name="keywords" content="{$site_info.site_seo_keywords}">
+<!-- 页面描述内容 description -->
+<meta name="description" content="{$site_info.site_seo_description}">
+
+<link rel="stylesheet" href="__TMPL__/public/assets/css/style.css">
+<body>
+<div class="login-container">
+    <h1>{$join.title}</h1>
+    <form id="joinForm" target="nm_iframe">
+        <div>
+            <input type="text" id="join_name" name="join_name" class="join_name" placeholder="姓名" autocomplete="off" />
+        </div>
+        <div>
+            <select name="join_gender" class="join_name">
+                <option value ="1">男</option>
+                <option value ="0">女</option>
+            </select>
+        </div>
+        <div>
+            <input type="text" id="join_stuid" name="join_stuid" class="join_stuid" placeholder="学号" autocomplete="off" />
+        </div>
+        <div>
+            <input type="text" id="join_college" name="join_college" class="join_college" placeholder="学院" autocomplete="off" />
+        </div>
+        <div>
+            <input type="text" id="join_department" name="join_department" class="join_department" placeholder="系部" autocomplete="off" />
+        </div>
+        <div>
+            <input type="text" id="join_major" name="join_major" class="join_major" placeholder="专业" autocomplete="off" />
+        </div>
+        <div>
+            <input type="text" id="join_class" name="join_class" class="join_class" placeholder="班级" autocomplete="off" />
+        </div>
+        <div>
+            <input type="text" id="join_phone" name="join_phone" class="phone_number" placeholder="手机号码" autocomplete="off" id="number" />
+        </div>
+        <div>
+            <input type="text" id="join_qq" name="join_qq" class="join_qq" placeholder="QQ" autocomplete="off" />
+        </div>
+        <div>
+            <input type="text" id="join_address" name="join_address" class="join_address" placeholder="地址" autocomplete="off" />
+        </div>
+        <div>
+            <textarea id="join_about" name="join_about" class="join_about" style="resize:none;" placeholder="请输入个人简介" autocomplete="off"></textarea>
+        </div>
+        <div>
+            <input type="text" id="captcha" name="captcha" class="captcha" placeholder="验证码" autocomplete="off" />
+        </div>
+        <div style="margin-top: 10px;">
+            <captcha height="50" width="200"/>
+        </div>
+        <button id="btnSubmit" type="submit">提 交</button>
+    </form>
+    <a href="/">
+        <button type="button" class="register-tis">返 回 首 页</button>
+    </a>
+    <iframe id="id_iframe" name="nm_iframe" style="display:none;"></iframe>
+</div>
+
+<!--js文件-->
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="__TMPL__/public/assets/js/jquery.min.js"></script>
+<script src="__TMPL__/public/assets/js/supersized.3.2.7.min.js"></script>
+<script src="__TMPL__/public/assets/js/jquery.validate.min.js?var1.14.0"></script>
+<script>
+    $(document).ready(function(){
+        $("#btnSubmit").click(function(){
+            //POST提交
+            $.ajax({
+                url:"{:url('join/join/add')}",    //请求的url地址
+                dataType:"json",   //返回格式为json
+                async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+                data:$('#joinForm').serialize(),    //参数值
+                type:"POST",   //请求方式
+                success:function(data){
+                    if(data.status==1){
+                        alert('{$join.endJoin}');
+                        window.location.href="/";
+                    }else{
+                        alert(data.msg);
+                    }
+                },
+                error:function(data){
+                    //请求出错处理
+                    alert("Error:"+data.msg);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    jQuery(function($){
+
+        $.supersized({
+
+// 功能
+            slide_interval     : 4000,    // 转换之间的长度
+            transition         : 1,    // 0 - 无，1 - 淡入淡出，2 - 滑动顶，3 - 滑动向右，4 - 滑底，5 - 滑块向左，6 - 旋转木马右键，7 - 左旋转木马
+            transition_speed   : 1000,    // 转型速度
+            performance        : 1,    // 0 - 正常，1 - 混合速度/质量，2 - 更优的图像质量，三优的转换速度//（仅适用于火狐/ IE浏览器，而不是Webkit的）
+
+// 大小和位置
+            min_width          : 0,    // 最小允许宽度（以像素为单位）
+            min_height         : 0,    // 最小允许高度（以像素为单位）
+            vertical_center    : 1,    // 垂直居中背景
+            horizontal_center  : 1,    // 水平中心的背景
+            fit_always         : 0,    // 图像绝不会超过浏览器的宽度或高度（忽略分钟。尺寸）
+            fit_portrait       : 1,    // 纵向图像将不超过浏览器高度
+            fit_landscape      : 0,    // 景观的图像将不超过宽度的浏览器
+
+// 组件
+            slide_links        : 'blank',    // 个别环节为每张幻灯片（选项：假的，'民'，'名'，'空'）
+            slides             : [    // 幻灯片影像
+                <foreach name="lists" item="vo">
+                {image : '{:cmf_get_image_preview_url($vo['image'])}'},
+            </foreach>
+            ]
+
+        });
+
+    });
+</script>
+
+<script>
+    //打开字滑入效果
+    window.onload = function(){
+        $(".connect p").eq(0).animate({"left":"0%"}, 600);
+        $(".connect p").eq(1).animate({"left":"0%"}, 400);
+    };
+    //jquery.validate表单验证
+    $(document).ready(function(){
+        $("#joinForm").validate({
+            rules:{
+                join_name:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:20,//最多20个字符
+                },
+                join_stuid:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:20,//最多20个字符
+                },
+                join_college:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:20,//最多20个字符
+                },
+                // join_department:{
+                //     required:true,//必填
+                //     minlength:1, //最少1个字符
+                //     maxlength:20,//最多20个字符
+                // },
+                join_major:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:20,//最多20个字符
+                },
+                join_class:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:20,//最多20个字符
+                },
+                join_phone:{
+                    required:true,
+                    phone_number:true,//自定义的规则
+                    digits:true,//整数
+                },
+                join_qq:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:20,//最多20个字符
+                    digits:true,//整数
+                },
+                join_address:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:100,//最多20个字符
+                },
+                join_about:{
+                    required:true,//必填
+                    minlength:1, //最少1个字符
+                    maxlength:200,//最多20个字符
+                },
+            },
+            //错误信息提示
+            messages:{
+                join_name:{
+                    required:"姓名必填",//必填
+                    minlength:"姓名最少为1个字符", //最少1个字符
+                    maxlength:"姓名最多为20个字符",//最多20个字符
+                },
+                join_stuid:{
+                    required:"学号必填",//必填
+                    minlength:"学号最少为1个字符", //最少1个字符
+                    maxlength:"学号最少为20个字符",//最多20个字符
+                },
+                join_college:{
+                    required:"学院必填",//必填
+                    minlength:"学院最少为1个字符", //最少1个字符
+                    maxlength:"学院最少为20个字符",//最多20个字符
+                },
+                // join_department:{
+                //     required:"系部必填",//必填
+                //     minlength:"系部最少为1个字符", //最少1个字符
+                //     maxlength:"系部最少为20个字符",//最多20个字符
+                // },
+                join_major:{
+                    required:"专业必填",//必填
+                    minlength:"专业最少为1个字符", //最少1个字符
+                    maxlength:"专业最少为20个字符",//最多20个字符
+                },
+                join_class:{
+                    required:"班级必填",//必填
+                    minlength:"班级最少为1个字符", //最少1个字符
+                    maxlength:"班级最少为20个字符",//最多20个字符
+                },
+                join_phone:{
+                    required:"手机号码必填",
+                    phone_number:"请输入正确的手机号码",//自定义的规则
+                    digits:"必须为数字",//整数
+                },
+                join_qq:{
+                    required:"QQ必填",//必填
+                    minlength:"QQ最少为1个字符", //最少1个字符
+                    maxlength:"QQ最少为20个字符",//最多20个字符
+                    digits:true,//整数
+                },
+                join_address:{
+                    required:"地址必填",//必填
+                    minlength:"姓名最少为1个字符", //最少1个字符
+                    maxlength:"姓名最少为100个字符",//最多20个字符
+                },
+                join_about:{
+                    required:"个人简介必填",//必填
+                    minlength:"姓名最少为1个字符", //最少1个字符
+                    maxlength:"姓名最少为200个字符",//最多20个字符
+                },
+
+            },
+        });
+        //添加自定义验证规则
+        jQuery.validator.addMethod("phone_number", function(value, element) {
+            var length = value.length;
+            var phone_number = /^((1[0-9]{1})+\d{9})$/
+            return this.optional(element) || (length == 11 && phone_number.test(value));
+        }, "手机号码格式错误");
+    });
+
+</script>
+<script>
+    $(function time(){
+        var nowDate = new Date();//获取系统当前时间
+        var now=nowDate.toLocaleDateString();     // 获取当前日期
+        var time1='{$join.startTime}';
+        var time2='{$join.endTime}';
+        var date1 = time1.replace(/-/g,'/');
+        var date2 = time2.replace(/-/g,'/');
+        var timestamp1 = new Date(nowDate).getTime();
+        var timestamp2 = new Date(date1).getTime();
+        var timestamp3 = new Date(date2).getTime();
+        if(timestamp1<timestamp2 || timestamp1>timestamp3){
+            //不在报名时间访问
+            $("body").css("display","none");
+            window.location.href="/";
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<include file="public@header"/>
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('banner/index')}">轮播列表</a></li>
+        <li class="active"><a href="{:url('banner/add')}">添加轮播</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('banner/add')}">
+        <div class="form-group">
+            <label for="input-banner_name" class="col-sm-2 control-label"><span
+                    class="form-required">*</span>轮播名称</label>
+
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-banner_name" name="banner_name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-banner_link" class="col-sm-2 control-label"><span class="form-required">*</span>链接</label>
+
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-banner_link" name="banner_link" value="#">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-banner_link" class="col-sm-2 control-label"><span class="form-required">*</span>显示文本：</label>
+
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-banner_content" name="banner_content" style="resize:none;"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>图片</label>
+
+            <div class="col-md-6 col-sm-10">
+                <div style="text-align: left;">
+                    <input type="hidden" name="banner_img" id="thumbnail" value="">
+                    <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                        <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                             id="thumbnail-preview"
+                             width="135" style="cursor: pointer"/>
+                    </a>
+                    <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>状态</label>
+
+            <div class="col-md-6 col-sm-10">
+                <label class="checkbox-inline">
+                    <input value="1" type="radio" name="banner_status" checked>正常
+                </label>
+                <label class="checkbox-inline">
+                    <input value="0" type="radio" name="banner_status">禁用
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('ADD')}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="public@footer" />
+<script>
+    $(function () {
+
+        $('.btn-cancel-thumbnail').click(function () {
+            $('#thumbnail-preview').attr('src', '__TMPL__/public/assets/images/default-thumbnail.png');
+            $('#thumbnail').val('');
+        });
+
+    });
+</script>
+</body>
+</html>

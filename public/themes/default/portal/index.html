@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>{$site_info.site_name} </title>
+	<!-- 页面关键词 keywords -->
+	<meta name="keywords" content="{$site_info.site_seo_keywords}">
+	<!-- 页面描述内容 description -->
+	<meta name="description" content="{$site_info.site_seo_description}">
+
+	<link rel="stylesheet" href="__TMPL__/public/assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="__TMPL__/public/assets/css/swiper.min.css" />
+	<link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.0/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="__TMPL__/public/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__TMPL__/public/assets/css/animate.css">
+	<link rel="stylesheet" href="__TMPL__/public/assets/css/slick.css">
+	<link rel="stylesheet" href="__TMPL__/public/assets/css/jquery.fullPage.css" />
+	<link rel="stylesheet" href="__TMPL__/public/assets/css/head.css" />
+	<link rel="stylesheet" href="__TMPL__/public/assets/css/index.css">
+	<style>
+		html{
+			touch-action:none;
+		}
+	</style>
+</head>
+<body>
+
+<header class="header">
+	<div class="container clearfix">
+		<div class="fl left">
+			<a href="javascript:void(0)"><img src="__TMPL__/public/assets/image/logo.png" alt="" class="img1" /></a>
+			<a href="javascript:void(0)"><img src="__TMPL__/public/assets/image/logo3.jpg" alt="" class="img2" /></a>
+		</div>
+		<div class="fr nav">
+			<ul class="navbar_nav" data-in="fadeInDown" data-out="fadeOutUp">
+				<foreach name="navs" item="vo">
+					<li>
+						<a href="{$vo['href']}" target="{$vo['target']}">{$vo['name']}</a>
+					</li>
+				</foreach>
+				<li class="dropdown">
+					<a href="#">友情链接</a>
+					<div class="dropdown_menu">
+						<foreach name="links" item="vo">
+							<a href="{$vo['url']}" target="{$vo['target']}">{$vo['name']}</a>
+						</foreach>
+					</div>
+				</li>
+			</ul>
+		</div>
+	<a href="javascript:void(0)" id="navToggle"><span></span></a>
+	</div>
+</header>
+
+<div class="m_nav" style="display: none">
+	<div class="top clearfix">
+		<img src="__TMPL__/public/assets/image/closed.png" alt="" class="closed" />
+	</div>
+	<div class="logo">
+		<img src="__TMPL__/public/assets/image/logo3.jpg" alt="" />
+	</div>
+	<ul class="ul" data-in="fadeInDown" data-out="fadeOutUp">
+		<foreach name="navs" item="vo">
+			<li>
+				<a href="{$vo['href']}" target="{$vo['target']}">{$vo['name']}</a>
+			</li>
+		</foreach>
+		<li class="dropdown">
+			<a href="#">友情链接</a>
+			<div class="dropdown_menu">
+				<foreach name="links" item="vo">
+					<a href="{$vo['url']}" target="{$vo['target']}">{$vo['name']}</a>
+				</foreach>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<div id="index_main" class="index_main">
+	<div class="section section1">
+		<div class="index_banner">
+			<foreach name="lists" item="vo">
+				<div class="item">
+					<div class="items scaleBg" style="background-image: url({:cmf_get_image_preview_url($vo['banner_img'])});">
+					</div>
+					<div class="inner">
+						<div class="block_txt">
+							{$vo['banner_content']}
+						</div>
+					</div>
+				</div>
+			</foreach>
+		</div>
+		<div class="left slick_txt">
+			<div class="prev slick_arrow"></div>
+		</div>
+		<div class="right slick_txt">
+			<div class="next slick_arrow"></div>
+		</div>
+		<div class="number">
+			<div class="inner clearfix">
+				<foreach name="lists" item="vo">
+					<span>{$vo['banner_name']}</span>
+				</foreach>
+			</div>
+		</div>
+	</div>
+	<div class="section section2">
+		<div style="height:100%;width:100%;padding-top:60px;" >
+			<div style="height:10%; width:100%;text-align:center;">
+				<span style="border-bottom:solid 5px red;font-weight:bold;font-size:2.5rem;">导师介绍</span>
+			</div>
+			<div style="height:90%;width:100%;">
+				<iframe frameborder="0" height="100%" width="100%" src="teachermes.html"></iframe>
+			</div>
+		</div>
+	</div>
+	<div class="section section3">
+		<div style="height:100%;width:100%;padding-top:60px;" >
+			<div style="height:10%;width:100%;text-align:center;">
+				<span style="border-bottom:solid 5px red;font-weight:bold;font-size:2.5rem;">关于硕闻</span>
+			</div>
+			<div style="height:69%;width:100%;">
+				<iframe frameborder="0" scrolling="no" height="100%" width="100%" src="workabout.html"></iframe>
+			</div>
+			<div style="height:21%; padding-top: 2%; width:100%;background-color:#0e0e0e;text-align:center;color:wheat;font-weight:bold;font-size:1.1rem;">
+				{$site_info.site_analytics}
+				<p>{$site_info.site_icp}</p>
+			</div>
+		</div>
+	</div>
+<!-- 	<div class="section section4">
+
+	</div> -->
+</div>
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.0/js/bootstrap.min.js"></script>
+<script src="/themes/default/public/assets/js/jquery.min.js"></script>
+<script src="/themes/default/public/assets/js/bootstrap.min.js"></script>
+<script src="/themes/default/public/assets/js/jquery.fullPage.min.js"></script>
+<script src="/themes/default/public/assets/js/index_slick.js"></script>
+<script src="/themes/default/public/assets/js/swiper.min.js"></script>
+<script src="/themes/default/public/assets/js/index.js"></script>
+</body>
+</html>

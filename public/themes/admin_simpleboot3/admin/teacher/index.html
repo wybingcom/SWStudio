@@ -1,0 +1,46 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('teacher/index')}">导师简介管理</a></li>
+        <li><a href="{:url('teacher/add')}">添加简介</a></li>
+    </ul>
+    <table class="table table-hover table-bordered margin-top-20">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th>教师姓名</th>
+            <th>教师头像</th>
+            <th>学历</th>
+            <th>添加时间</th>
+            <th width="130">{:lang('ACTIONS')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="lists" item="vo">
+            <tr>
+                <td>{$vo.teacher_id}</td>
+                <td>{$vo.teacher_name}</td>
+                <td>
+                    <a href="javascript:parent.imagePreviewDialog('{:cmf_get_image_preview_url($vo['teacher_img'])}');">
+                        <i class="fa fa-photo fa-fw"></i>
+                    </a>
+                </td>
+                <td>{$vo.teacher_position}</td>
+                <td>
+                    {:date('Y-m-d H:i:s',$vo['teacher_create_time'])}
+                </td>
+                <td>
+                    <a href='{:url("teacher/edit",array("teacher_id"=>$vo["teacher_id"]))}'>{:lang('EDIT')}</a>
+                    <a class="js-ajax-delete" href="{:url('teacher/delete',array('teacher_id'=>$vo['teacher_id']))}">{:lang('DELETE')}</a>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

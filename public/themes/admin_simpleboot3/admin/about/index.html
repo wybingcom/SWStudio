@@ -1,0 +1,46 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('about/index')}">关于硕闻管理</a></li>
+        <li><a href="{:url('about/add')}">添加信息</a></li>
+    </ul>
+    <table class="table table-hover table-bordered margin-top-20">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th>年份</th>
+            <th>背景图片</th>
+            <th>标题</th>
+            <th>添加时间</th>
+            <th width="130">{:lang('ACTIONS')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <foreach name="lists" item="vo">
+            <tr>
+                <td>{$vo.about_id}</td>
+                <td>{$vo.about_year}</td>
+                <td>
+                    <a href="javascript:parent.imagePreviewDialog('{:cmf_get_image_preview_url($vo['about_img'])}');">
+                        <i class="fa fa-photo fa-fw"></i>
+                    </a>
+                </td>
+                <td>{$vo.about_title}</td>
+                <td>
+                    {:date('Y-m-d H:i:s',$vo['about_create_time'])}
+                </td>
+                <td>
+                    <a href='{:url("about/edit",array("about_id"=>$vo["about_id"]))}'>{:lang('EDIT')}</a>
+                    <a class="js-ajax-delete" href="{:url('about/delete',array('about_id'=>$vo['about_id']))}">{:lang('DELETE')}</a>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

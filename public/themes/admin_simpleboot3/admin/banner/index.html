@@ -1,0 +1,51 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap js-check-wrap">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="{:url('banner/index')}">轮播图管理</a></li>
+        <li><a href="{:url('banner/add')}">添加轮播</a></li>
+    </ul>
+    <table class="table table-hover table-bordered margin-top-20">
+        <thead>
+        <tr>
+            <th width="50">ID</th>
+            <th>轮播名称</th>
+            <th>焦点图片</th>
+            <th>链接</th>
+            <th>添加时间</th>
+            <th>状态</th>
+            <th width="130">{:lang('ACTIONS')}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <php>
+            $status=[0=>'禁用',1=>'正常'];
+        </php>
+        <foreach name="lists" item="vo">
+            <tr>
+                <td>{$vo.banner_id}</td>
+                <td>{$vo.banner_name}</td>
+                <td>
+                    <a href="javascript:parent.imagePreviewDialog('{:cmf_get_image_preview_url($vo['banner_img'])}');">
+                        <i class="fa fa-photo fa-fw"></i>
+                    </a>
+                </td>
+                <td>{$vo.banner_link}</td>
+                <td>
+                    {:date('Y-m-d H:i:s',$vo['banner_add_time'])}
+                </td>
+                <td>{$status[$vo['banner_status']]}</td>
+                <td>
+                    <a href='{:url("banner/edit",array("banner_id"=>$vo["banner_id"]))}'>{:lang('EDIT')}</a>
+                    <a class="js-ajax-delete" href="{:url('banner/delete',array('banner_id'=>$vo['banner_id']))}">{:lang('DELETE')}</a>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+    <div class="pagination">{$page}</div>
+</div>
+<script src="__STATIC__/js/admin.js"></script>
+</body>
+</html>

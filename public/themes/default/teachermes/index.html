@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>导师介绍-{$site_info.site_name}</title>
+    <link rel="stylesheet" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+    <link href="__TMPL__/public/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link href="__TMPL__/public/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="__TMPL__/public/assets/css/material-cards.css">
+    <style type="text/css">
+
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+
+        body {
+            background-color: #ECEFF1;
+            color: #37474F;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 200;
+        }
+
+    </style>
+</head>
+<body>
+<div class="htmleaf-container">
+    <br>
+    <section class="container">
+        <div class="row active-with-click">
+            <foreach name="lists" item="vo">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <article class="material-card {$vo['teacher_color']}">
+                        <h2>
+                            <span>{$vo['teacher_name']}</span>	<!-- 姓名 -->
+                            <strong>
+                                <i class="fa fa-fw fa-mortar-board "></i>
+                                {$vo['teacher_position']}
+                            </strong>
+                        </h2>
+                        <div class="mc-content">
+                            <div class="img-container">
+                                <img class="img-responsive" src="{:cmf_get_image_preview_url($vo['teacher_img'])}">
+                            </div>
+                            <div class="mc-description">
+                                {$vo['teacher_desc']}
+                            </div>
+                        </div>
+                        <a class="mc-btn-action">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <div class="mc-footer">
+                            <a class="fa fa-fw fa-star"></a>
+                            <a class="fa fa-fw fa-star"></a>
+                            <a class="fa fa-fw fa-star"></a>
+                            <a class="fa fa-fw fa-star"></a>
+                            <a class="fa fa-fw fa-star-half-o"></a>
+                        </div>
+                    </article>
+                </div>
+            </foreach>
+        </div>
+    </section>
+</div>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="__TMPL__/public/assets/js/jquery.material-cards.min.js"></script>
+<script>
+    $(function() {
+        $('.material-card').materialCard({
+            icon_close: 'fa-chevron-left',
+            icon_open: 'fa-bars',
+            icon_spin: 'fa-spin-fast',
+            card_activator: 'click'
+        });
+
+        // $('.material-card').materialCard('toggle');
+        // $('.material-card').materialCard('close');
+        // $('.material-card:eq(1)').materialCard('open');
+        window.setTimeout(function(){
+            $('.material-card:eq(1)').materialCard('open');
+        },3000);
+        // window.setInterval(function(){
+        // 	$('.material-card').materialCard('toggle');
+        //  }, 3000);
+
+    });
+</script>
+</body>
+</html>

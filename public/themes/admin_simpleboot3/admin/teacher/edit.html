@@ -1,0 +1,70 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('teacher/index')}">导师简介管理</a></li>
+        <li><a href="{:url('teacher/add')}">添加简介</a></li>
+        <li class="active"><a>编辑简介</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('teacher/edit')}">
+        <div class="form-group">
+            <label for="input-teacher_name" class="col-sm-2 control-label"><span class="form-required">*</span>导师姓名</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-teacher_name" name="teacher_name" value="{$info.teacher_name}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-teacher_link" class="col-sm-2 control-label"><span class="form-required">*</span>职位</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-teacher_link" name="teacher_position" value="{$info.teacher_position}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-teacher_color" class="col-sm-2 control-label"><span
+                    class="form-required">*</span>卡片颜色</label>
+
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-teacher_color" name="teacher_color" value="{$info.teacher_color}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-teacher_link" class="col-sm-2 control-label"><span class="form-required">*</span>简介信息：</label>
+
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-teacher_content" name="teacher_desc" style="resize:none;">{$info.teacher_desc}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>图片</label>
+
+            <div class="col-md-6 col-sm-10">
+                <div style="text-align: left;">
+                    <input type="hidden" name="teacher_img" id="thumbnail" value="{$info.teacher_img|default=''}">
+                    <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                        <if condition="empty($info.teacher_img)">
+                            <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                 id="thumbnail-preview"
+                                 width="135" style="cursor: pointer"/>
+                            <else/>
+                            <img src="{:cmf_get_image_preview_url($info.teacher_img)}"
+                                 id="thumbnail-preview"
+                                 width="135" style="cursor: pointer"/>
+                        </if>
+                    </a>
+                    <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="teacher_id" value="{$info.teacher_id}" />
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                <a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="public@footer" />
+</body>
+</html>

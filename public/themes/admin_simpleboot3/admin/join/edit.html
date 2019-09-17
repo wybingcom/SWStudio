@@ -1,0 +1,155 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('join/index')}">报名管理</a></li>
+        <li class="active"><a>信息编辑</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('join/edit')}">
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>照片</label>
+
+            <div class="col-md-6 col-sm-10">
+                <div style="text-align: left;">
+                    <input type="hidden" name="join_stuimg" id="thumbnail" value="{$info.join_stuimg|default=''}">
+                    <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                        <if condition="empty($info.join_stuimg)">
+                            <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                 id="thumbnail-preview"
+                                 width="135" style="cursor: pointer"/>
+                            <else/>
+                            <img src="{:cmf_get_image_preview_url($info.join_stuimg)}"
+                                 id="thumbnail-preview"
+                                 width="135" style="cursor: pointer"/>
+                        </if>
+                    </a>
+                    <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="input-join_name" class="col-sm-2 control-label"><span class="form-required">*</span>姓名</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_name" name="join_name" value="{$info.join_name}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>性别</label>
+            <div class="col-md-6 col-sm-10">
+                <label class="checkbox-inline">
+                    <input value="1" type="radio" name="join_gender" <if condition="$info['join_gender'] eq 1">checked</if>>男
+                </label>
+                <label class="checkbox-inline">
+                    <input value="0" type="radio" name="join_gender" <if condition="$info['join_gender'] eq 0">checked</if>>女
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_stuid" class="col-sm-2 control-label"><span class="form-required">*</span>学号</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_stuid" name="join_stuid" value="{$info.join_stuid}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_college" class="col-sm-2 control-label"><span class="form-required">*</span>学院</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_college" name="join_college" value="{$info.join_college}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_department" class="col-sm-2 control-label"><span class="form-required">*</span>系部</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_department" name="join_department" value="{$info.join_department}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_major" class="col-sm-2 control-label"><span class="form-required">*</span>专业</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_major" name="join_major" value="{$info.join_major}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_class" class="col-sm-2 control-label"><span class="form-required">*</span>班级</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_class" name="join_class" value="{$info.join_class}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_phone" class="col-sm-2 control-label"><span class="form-required">*</span>电话</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_phone" name="join_phone" value="{$info.join_phone}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_qq" class="col-sm-2 control-label"><span class="form-required">*</span>QQ</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-join_qq" name="join_qq" value="{$info.join_qq}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_address" class="col-sm-2 control-label"><span class="form-required">*</span>地址</label>
+
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-join_address" name="join_address" style="resize:none;">{$info.join_address}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_about" class="col-sm-2 control-label"><span class="form-required">*</span>简介</label>
+
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-join_about" name="join_about" style="resize:none;">{$info.join_about}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_teacheropinion" class="col-sm-2 control-label"><span class="form-required">*</span>教师意见</label>
+
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-join_teacheropinion" name="join_teacheropinion" style="resize:none;">{$info.join_teacheropinion}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="input-join_workopinion" class="col-sm-2 control-label"><span class="form-required">*</span>工作室意见</label>
+
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-join_workopinion" name="join_workopinion" style="resize:none;">{$info.join_workopinion}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>状态</label>
+            <div class="col-md-6 col-sm-10">
+                <label class="checkbox-inline">
+                    <input value="1" type="radio" name="join_state" <if condition="$info['join_state'] eq 1">checked</if>>录取
+                </label>
+                <label class="checkbox-inline">
+                    <input value="0" type="radio" name="join_state" <if condition="$info['join_state'] eq 0">checked</if>>未录取
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="join_id" value="{$info.join_id}" />
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                <a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="public@footer" />
+</body>
+</html>

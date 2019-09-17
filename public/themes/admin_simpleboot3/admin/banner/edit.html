@@ -1,0 +1,73 @@
+<include file="public@header" />
+</head>
+<body>
+<div class="wrap">
+    <ul class="nav nav-tabs">
+        <li><a href="{:url('banner/index')}">轮播列表</a></li>
+        <li><a href="{:url('banner/add')}">添加轮播</a></li>
+        <li class="active"><a>编辑轮播</a></li>
+    </ul>
+    <form method="post" class="form-horizontal js-ajax-form margin-top-20" action="{:url('banner/edit')}">
+        <div class="form-group">
+            <label for="input-banner_name" class="col-sm-2 control-label"><span class="form-required">*</span>轮播名称</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-banner_name" name="banner_name" value="{$info.banner_name}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-banner_link" class="col-sm-2 control-label"><span class="form-required">*</span>链接</label>
+            <div class="col-md-6 col-sm-10">
+                <input type="text" class="form-control" id="input-banner_link" name="banner_link" value="{$info.banner_link}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="input-banner_link" class="col-sm-2 control-label"><span class="form-required">*</span>显示文本：</label>
+
+            <div class="col-md-6 col-sm-10">
+                <textarea class="form-control" id="input-banner_content" name="banner_content" style="resize:none;">{$info.banner_content}</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>图片</label>
+
+            <div class="col-md-6 col-sm-10">
+                <div style="text-align: left;">
+                    <input type="hidden" name="banner_img" id="thumbnail" value="{$info.banner_img|default=''}">
+                    <a href="javascript:uploadOneImage('图片上传','#thumbnail');">
+                        <if condition="empty($info.banner_img)">
+                            <img src="__TMPL__/public/assets/images/default-thumbnail.png"
+                                 id="thumbnail-preview"
+                                 width="135" style="cursor: pointer"/>
+                            <else/>
+                            <img src="{:cmf_get_image_preview_url($info.banner_img)}"
+                                 id="thumbnail-preview"
+                                 width="135" style="cursor: pointer"/>
+                        </if>
+                    </a>
+                    <input type="button" class="btn btn-sm btn-cancel-thumbnail" value="取消图片">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"><span class="form-required">*</span>状态</label>
+            <div class="col-md-6 col-sm-10">
+                <label class="checkbox-inline">
+                    <input value="1" type="radio" name="banner_status" <if condition="$info['banner_status'] eq 1">checked</if>>正常
+                </label>
+                <label class="checkbox-inline">
+                    <input value="0" type="radio" name="banner_status" <if condition="$info['banner_status'] eq 0">checked</if>>禁用
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="hidden" name="banner_id" value="{$info.banner_id}" />
+                <button type="submit" class="btn btn-primary js-ajax-submit">{:lang('SAVE')}</button>
+                <a class="btn btn-default" href="javascript:history.back(-1);">{:lang('BACK')}</a>
+            </div>
+        </div>
+    </form>
+</div>
+<include file="public@footer" />
+</body>
+</html>
